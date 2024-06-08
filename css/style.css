@@ -1,0 +1,42 @@
+@font-face {
+	font-family: "open-sans";
+	src: url(../fonts/OpenSans-Regular.ttf);
+}
+
+* {
+	font-family:"open-sans"
+}
+
+.header {
+	height: 100vh;
+	display: flex;
+	align-items: center;
+}
+
+.my-btn {
+	background-color: black;
+	transition: all 400ms;
+	border: #000000;
+}
+
+.my-btn:hover {
+	background-color: rgb(56, 56, 56);
+}
+
+.form-control:focus {
+	border-color: #000000;
+	outline: 0;
+	box-shadow: 0 0 0 0.25rem rgb(0 0 0 / 25%);
+}
+
+@media (min-width: 1140px) {
+
+	.container-xxl,
+	.container-xl,
+	.container-lg,
+	.container-md,
+	.container-sm,
+	.container {
+		max-width: 960px;
+	}
+}
