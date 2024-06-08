@@ -3,7 +3,7 @@
 	<head>
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<title>Document</title>
+		<title>SignUp</title>
 		<link rel="stylesheet" href="css/all.min.css">
 		<link rel="stylesheet" href="css/bootstrap.min.css">
 		<link rel="stylesheet" href="css/style.css">
@@ -17,7 +17,8 @@
 						<h5 class="h1 fw-bolder mb-4">Signup</h5>
 						<div class="mb-3">
 							<div class="form-floating">
-								<input type="text" class="form-control" id="floatingName"
+								<input type="text" oninput="signUpNameValidation()" class="form-control"
+									id="floatingName"
 									placeholder="Name">
 								<label for="floatingName">Name</label>
 							</div>
@@ -25,7 +26,8 @@
 						</div>
 						<div class="mb-3">
 							<div class="form-floating">
-								<input type="email" class="form-control" id="floatingEmail"
+								<input type="email" oninput="signUpEmailValidation()"
+									class="form-control" id="floatingEmail"
 									placeholder="Email">
 								<label for="floatingEmail">Email</label>
 							</div>
@@ -33,12 +35,14 @@
 						</div>
 						<div class="mb-3">
 							<div class="form-floating">
-								<input type="password" class="form-control" id="floatingPassword"
+								<input type="password" oninput="signUpPassValidation()"
+									class="form-control" id="floatingPassword"
 									placeholder="Password">
 								<label for="floatingPassword">Password</label>
 							</div>
 						</div>
-						<button id="signUpbtn" onclick="signUpUser()" class="btn btn-primary my-btn">Submit</button>
+						<button id="signUpBtn" onclick="signUpUser()"
+							class="btn btn-primary my-btn">Submit</button>
 					</div>
 				</div>
 
