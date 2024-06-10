@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-		<meta charset="UTF-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>SignUp</title>
-		<link rel="stylesheet" href="css/all.min.css">
-		<link rel="stylesheet" href="css/bootstrap.min.css">
-		<link rel="stylesheet" href="css/style.css">
+		<link rel="stylesheet" href="css/all.min.css" />
+		<link rel="stylesheet" href="css/bootstrap.min.css" />
+		<link rel="stylesheet" href="css/style.css" />
 	</head>
 	<body class="bg-body-secondary">
 		<div class="header">
@@ -17,35 +17,71 @@
 						<h5 class="h1 fw-bolder mb-4">Signup</h5>
 						<div class="mb-3">
 							<div class="form-floating">
-								<input type="text" oninput="signUpNameValidation()" class="form-control"
+								<input
+									type="text"
+									oninput="signUpNameValidation()"
+									class="form-control"
 									id="floatingName"
-									placeholder="Name">
+									placeholder="Name" />
 								<label for="floatingName">Name</label>
 							</div>
-
+							<div id="validNameAlert"
+								class="d-none alert alert-warning d-flex align-items-center mt-2 p-1"
+								role="alert">
+								<ul class=" pt-3 d-felx justify-content-center align-items-center">
+									<li>Name Must Start with Capital Letter</li>
+									<li>At least 2 chars</li>
+								</ul>
+							</div>
 						</div>
 						<div class="mb-3">
 							<div class="form-floating">
-								<input type="email" oninput="signUpEmailValidation()"
-									class="form-control" id="floatingEmail"
-									placeholder="Email">
+								<input
+									type="email"
+									oninput="signUpEmailValidation()"
+									class="form-control"
+									id="floatingEmail"
+									placeholder="Email" />
 								<label for="floatingEmail">Email</label>
 							</div>
-
+							<div id="emailChecks" class="alert d-none alert-warning d-flex align-items-center mt-2 p-1"
+								role="alert">
+								<ul class="pt-3 d-felx align-items-center">
+									<li>ex : example@example.com</li>
+									<li class="d-none" id="alertUQEmail">Must be Unique</li>
+								</ul>
+							</div>
 						</div>
 						<div class="mb-3">
 							<div class="form-floating">
-								<input type="password" oninput="signUpPassValidation()"
-									class="form-control" id="floatingPassword"
-									placeholder="Password">
+								<input
+									type="password"
+									oninput="signUpPassValidation()"
+									class="form-control"
+									id="floatingPassword"
+									placeholder="Password" />
 								<label for="floatingPassword">Password</label>
 							</div>
+							<div id="validPassAlert"
+								class="alert d-none alert-warning d-flex align-items-center mt-2 p-1"
+								role="alert">
+								<ul class="pt-3 d-felx justify-content-center align-items-center">
+									<li>Must be 3 Chars at least</li>
+								</ul>
+							</div>
 						</div>
-						<button id="signUpBtn" onclick="signUpUser()"
-							class="btn btn-primary my-btn">Submit</button>
+						<button
+							id="signUpBtn"
+							onclick="signUpUser()"
+							class="btn btn-primary my-btn w-100">
+							Submit
+						</button>
+						<p class="lead fs-6 mt-2">
+							Already Singed Up?
+							<a class="signUp-link" href="index.html">Log in</a>
+						</p>
 					</div>
 				</div>
-
 			</div>
 		</div>
 		<script src="js/index.js"></script>

@@ -1,120 +1,177 @@
+//get all input elements
+
+var nameInput = document.getElementById("floatingName");
+var emailInput = document.getElementById("floatingEmail");
+var passwordInput = document.getElementById("floatingPassword");
+
+//alert  sign up elements
+var alertNameMsg = document.getElementById("validNameAlert");
+var alertPassMsg = document.getElementById("validPassAlert");
+var alertUQMsg = document.getElementById("alertUQEmail");
+var alertEmailChecks = document.getElementById("emailChecks");
+//alert log in elements
+var emailLoginCheck = document.getElementById("emailLoginCheck");
+var passLoginCheck = document.getElementById("passLoginCheck");
+
 var usersList = [];
 
+// get local storage content if exist
 if (null != localStorage.getItem("usersList"))
 	usersList = JSON.parse(localStorage.getItem("usersList"));
 
-// get local storage content if exist
-
 function clearSignUpForm() {
-
-	nameInput = document.getElementById("floatingName");
 	nameInput.value = null;
 	nameInput.classList.remove("is-valid");
 
-	emailInput = document.getElementById("floatingEmail");
 	emailInput.value = null;
 	emailInput.classList.remove("is-valid");
 
-	passwordInput = document.getElementById("floatingPassword");
 	passwordInput.value = null;
 	passwordInput.classList.remove("is-valid");
 }
 
-
+//to check if mail follow the regex
 function signUpNameValidation() {
-	element = document.getElementById("floatingName");
-	var regex = /^[A-Z][a-zA-Z '.-]*[A-Za-z][^-]$/;
+	var regex = /^[A-Z][a-zA-Z '.-]*[A-Za-z]$/;
 
-	if (regex.test(element.value)) {
-		element.classList.remove("is-invalid");
-		element.classList.add("is-valid");
+	if (regex.test(nameInput.value)) {
+		nameInput.classList.remove("is-invalid");
+		nameInput.classList.add("is-valid");
+
+		alertNameMsg.classList.add("d-none");
+
 		return true;
 	} else {
-		element.classList.remove("is-valid");
-		element.classList.add("is-invalid");
+		nameInput.classList.remove("is-valid");
+		nameInput.classList.add("is-invalid");
+
+		alertNameMsg.classList.remove("d-none");
 		return false;
 	}
 }
+
+//to check if password follow regex
+function signUpPassValidation() {
+	var regex = /^[A-Za-z\d]{3,}$/;
+
+	if (regex.test(passwordInput.value)) {
+		passwordInput.classList.remove("is-invalid");
+		passwordInput.classList.add("is-valid");
+
+		alertPassMsg.classList.add("d-none");
+
+		return true;
+	} else {
+		passwordInput.classList.remove("is-valid");
+		passwordInput.classList.add("is-invalid");
+
+		alertPassMsg.classList.remove("d-none");
+
+		return false;
+	}
+}
+
 function signUpEmailValidation() {
-	element = document.getElementById("floatingEmail");
 	var regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-	if (regex.test(element.value) && isUniqueEmail(element.value)) {
-		element.classList.remove("is-invalid");
-		element.classList.add("is-valid");
+	if (regex.test(emailInput.value) && isUniqueEmail(emailInput.value)) {
+		emailInput.classList.remove("is-invalid");
+		emailInput.classList.add("is-valid");
+		alertEmailChecks.classList.add("d-none");
 		return true;
-	}
-	else {
-		element.classList.remove("is-valid");
-		element.classList.add("is-invalid");
+	} else {
+		emailInput.classList.remove("is-valid");
+		emailInput.classList.add("is-invalid");
+
+		alertEmailChecks.classList.remove("d-none");
+
 		return false;
 	}
-}
+};
+
 function isUniqueEmail(email) {
 	if (usersList.length == 0) {
-		return true
-	}
-	else {
+		return true;
+	} else {
 		for (var i = 0; i < usersList.length; i++) {
-			if (usersList[i].email != email) {
-				console.log(usersList[i].email + " " + " " + email)
-			}
-			else {
-				console.log("exist")
+			if (usersList[ i ].email.toLowerCase() === email.toLowerCase()) {
+				console.log("exist");
+				alertUQMsg.classList.remove("d-none");
 				return false;
 			}
 		}
-	}
-}
-function signUpPassValidation() {
-	element = document.getElementById("floatingPassword");
-
-	var regex = /^[A-Za-z\d]{3,}$/;
-
-	if (regex.test(element.value)) {
-		element.classList.remove("is-invalid");
-		element.classList.add("is-valid");
+		// If we finish the loop without finding a match, the email is unique
+		alertUQMsg.classList.add("d-none");
+		console.log("new");
 		return true;
-	} else {
-		element.classList.remove("is-valid");
-		element.classList.add("is-invalid");
-		return false;
 	}
 }
 
 function signUpUser() {
-	if (signUpNameValidation() && signUpEmailValidation() && signUpPassValidation()) {
-		console.log("yes");
+	if (
+		signUpNameValidation() &&
+		signUpEmailValidation() &&
+		signUpPassValidation()
+	) {
 		var userData = {
-			name: document.getElementById("floatingName").value,
-			email: document.getElementById("floatingEmail").value,
-			password: document.getElementById("floatingPassword").value,
+			name: nameInput.value,
+			email: emailInput.value,
+			password: passwordInput.value,
 		};
 		clearSignUpForm();
 		usersList.push(userData);
 		localStorage.setItem("usersList", JSON.stringify(usersList));
-	} else console.log("no1");
-}
+		window.location.href = "index.html";
+	} else console.log("error in signUpUser()");
+};
+
+
 
 function loginUser() {
-	var email = document.getElementById("floatingLoginEmail").value;
-	var pass = document.getElementById("floatingLoginPass").value;
+	var emailFound = false;
+	var passwordCorrect = false;
 
-	for (var i = 0; usersList.length > i; i++) {
-		if (usersList[i].email == email && usersList[i].password == pass) {
-			console.log("user exist");
-			sessionStorage.setItem("currentUser", JSON.stringify(usersList[i]));
-			window.location.href = "home.html";
+	for (var i = 0; i < usersList.length; i++) {
+		if (usersList[ i ].email.toLowerCase() == emailInput.value.toLowerCase()) {
+			emailFound = true;
+			if (usersList[ i ].password == passwordInput.value) {
+				passwordCorrect = true;
+				console.log("user exist");
+				sessionStorage.setItem("currentUser", JSON.stringify(usersList[ i ]));
+				window.location.href = "home.html";
+				break;  // Exit the loop once the user is found and authenticated
+			}
+		}
+	}
+	if (!emailFound) {
+		emailLoginCheck.classList.remove("d-none");
+	} else {
+		emailLoginCheck.classList.add("d-none");
+		if (!passwordCorrect) {
+			passLoginCheck.classList.remove("d-none");
+		} else {
+			passLoginCheck.classList.add("d-none");
 		}
 	}
 }
 
+
+var currentUser = JSON.parse(sessionStorage.getItem("currentUser"))
+
 function greetingMsg() {
-	var currentUser = JSON.parse(sessionStorage.getItem("currentUser"));
+
 	console.log(currentUser);
 	document.getElementById("welcomeMsg").innerText =
 		`
-	Welcome ${currentUser.name}
-	`;
+		Welcome ${currentUser.name}
+		`;
 }
-greetingMsg();
+
+function logUserOut() {
+	sessionStorage.removeItem("currentUser");
+	window.location.href = "index.html";
+}
+
+if (null != currentUser) {
+	greetingMsg();
+}

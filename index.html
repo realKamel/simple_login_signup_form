@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-		<meta charset="UTF-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>Smart Login System</title>
-		<link rel="stylesheet" href="css/all.min.css">
-		<link rel="stylesheet" href="css/bootstrap.min.css">
-		<link rel="stylesheet" href="css/style.css">
+		<link rel="stylesheet" href="css/all.min.css" />
+		<link rel="stylesheet" href="css/bootstrap.min.css" />
+		<link rel="stylesheet" href="css/style.css" />
 	</head>
 	<body class="bg-body-secondary">
 		<div class="header">
@@ -17,27 +17,52 @@
 						<h5 class="h1 fw-bolder mb-4">Smart Login System</h5>
 						<div class="mb-3">
 							<div class="form-floating">
-								<input type="email" class="form-control" id="floatingLoginEmail"
-									placeholder="Email">
-								<label for="floatingLoginEmail">Email</label>
+								<input
+									type="email"
+									class="form-control"
+									id="floatingEmail"
+									placeholder="Email" />
+								<label for="floatingEmail">Email</label>
 							</div>
-							<div id="emailHelp" class="form-text">We'll never share your email with
-								anyone else.</div>
 						</div>
 						<div class="mb-3">
 							<div class="form-floating">
-								<input type="password" class="form-control" id="floatingLoginPass"
-									placeholder="Password">
-								<label for="floatingLoginPass">Password</label>
+								<input
+									type="password"
+									class="form-control"
+									id="floatingPassword"
+									placeholder="Password" />
+								<label for="floatingPassword">Password</label>
 							</div>
 						</div>
-						<button onclick="loginUser()"
-							class="btn btn-primary my-btn">Submit</button>
+						<div class="d-grid gap-2">
+							<button onclick="loginUser()" class="btn btn-primary my-btn p-2">
+								Submit
+							</button>
+						</div>
+						<div id="emailLoginCheck"
+							class="alert d-none alert-danger d-flex align-items-center mt-2 p-1"
+							role="alert">
+							<ul class="pt-3 d-felx align-items-center">
+								<li>Your Email doesn't Exist</li>
+							</ul>
+						</div>
+						<div id="passLoginCheck"
+							class="alert d-none alert-danger d-flex align-items-center mt-2 p-1"
+							role="alert">
+							<ul class="pt-3 d-felx align-items-center">
+								<li>password is wrong</li>
+							</ul>
+						</div>
+						<p class="lead fs-6 mt-2">
+							Don’t have an account?
+							<a class="signUp-link" href="signup.html">Sign Up</a>
+						</p>
 					</div>
 				</div>
-
 			</div>
 		</div>
+		<script src="js/bootstrap.bundle.js"></script>
 		<script src="js/index.js"></script>
 	</body>
 </html>
